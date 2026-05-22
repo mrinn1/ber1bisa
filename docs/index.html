@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash of Clans - War Live Activity</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='90' fill='%23FF6B35'>⚔</text></svg>">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <span>Loading War Data...</span>
+        </div>
+    </div>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>⚔️ War Live Activity</h1>
+                    <p class="subtitle">Clash of Clans Real-time War Tracking</p>
+                </div>
+                <div class="header-controls">
+                    <button id="refreshBtn" class="btn btn-primary" title="Refresh Now">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">Refresh</span>
+                    </button>
+                    <button id="darkModeToggle" class="btn btn-secondary" title="Toggle Dark Mode">
+                        <span class="btn-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+            <div class="last-update">
+                <span class="update-icon">⏱️</span>
+                Last Updated: <span id="lastUpdated">--:-- --</span>
+                <span class="live-indicator" id="liveIndicator">● LIVE</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- War Status Section -->
+            <section class="war-status-section">
+                <div class="grid grid-2">
+                    <!-- Clan Card -->
+                    <div class="status-card clan-card">
+                        <div class="card-header">
+                            <h2>Our Clan</h2>
+                            <span class="badge badge-success">In War</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="clan-info">
+                                <h3 id="clanName">Loading...</h3>
+                                <p class="clan-tag" id="clanTag">--</p>
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat-box">
+                                    <div class="stat-value" id="clanStars">0</div>
+                                    <div class="stat-label">Stars</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value" id="clanDestruction">0%</div>
+                                    <div class="stat-label">Destruction</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value" id="clanLevel">0</div>
+                                    <div class="stat-label">Clan Level</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value" id="clanMembers">0</div>
+                                    <div class="stat-label">Members</div>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="clanProgressBar" style="width: 0%"></div>
+                                <span class="progress-label">War Progress</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enemy Card -->
+                    <div class="status-card enemy-card">
+                        <div class="card-header">
+                            <h2>Enemy Clan</h2>
+                            <span class="badge badge-danger">Opponent</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="clan-info">
+                                <h3 id="enemyName">Loading...</h3>
+                                <p class="clan-tag" id="enemyTag">--</p>
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat-box">
+                                    <div class="stat-value" id="enemyStars">0</div>
+                                    <div class="stat-label">Stars</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value" id="enemyDestruction">0%</div>
+                                    <div class="stat-label">Destruction</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value" id="enemyLevel">0</div>
+                                    <div class="stat-label">Clan Level</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value" id="enemyMembers">0</div>
+                                    <div class="stat-label">Members</div>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill enemy" id="enemyProgressBar" style="width: 0%"></div>
+                                <span class="progress-label">War Progress</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Attack Statistics -->
+            <section class="stats-section">
+                <div class="grid grid-3">
+                    <!-- Total Attacks -->
+                    <div class="stat-card">
+                        <div class="stat-card-icon">⚔️</div>
+                        <div class="stat-card-content">
+                            <h3>Total Attacks</h3>
+                            <div class="stat-card-value" id="totalAttacks">0</div>
+                            <p class="stat-card-desc" id="attackPercentage">0%</p>
+                        </div>
+                    </div>
+
+                    <!-- Remaining Attacks -->
+                    <div class="stat-card">
+                        <div class="stat-card-icon">🎯</div>
+                        <div class="stat-card-content">
+                            <h3>Remaining</h3>
+                            <div class="stat-card-value" id="remainingAttacks">0</div>
+                            <p class="stat-card-desc" id="remainingDesc">of attacks left</p>
+                        </div>
+                    </div>
+
+                    <!-- War Status -->
+                    <div class="stat-card">
+                        <div class="stat-card-icon">🛡️</div>
+                        <div class="stat-card-content">
+                            <h3>War Status</h3>
+                            <div class="stat-card-value" id="warStatus">--</div>
+                            <p class="stat-card-desc" id="warTime">--</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Members Not Attacked -->
+            <section class="members-section">
+                <div class="section-header">
+                    <h2>⏳ Members Waiting for Attack</h2>
+                    <span class="member-count" id="memberCount">0</span>
+                </div>
+                <div class="members-grid" id="membersGrid">
+                    <!-- Akan diisi oleh JavaScript -->
+                </div>
+                <div class="empty-state" id="emptyMembers" style="display: none;">
+                    <p>✨ All members have attacked!</p>
+                </div>
+            </section>
+
+            <!-- Activity Feed -->
+            <section class="activity-section">
+                <div class="section-header">
+                    <h2>📊 Activity Feed</h2>
+                    <span class="activity-count" id="activityCount">0</span>
+                </div>
+                <div class="activity-feed" id="activityFeed">
+                    <div class="empty-feed">
+                        <p>Waiting for war activity...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Auto-refreshes every 30 seconds • Powered by GitHub Actions • Last Update: <span id="footerTime">--:-- --</span></p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

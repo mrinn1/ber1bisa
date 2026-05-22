@@ -1,0 +1,26 @@
+{
+  "name": "clash-of-clans-war-live-activity",
+  "version": "1.0.0",
+  "description": "Clash of Clans War Live Activity Dashboard using GitHub Pages and GitHub Actions",
+  "main": "scripts/update-war-data.js",
+  "scripts": {
+    "update-war": "node scripts/update-war-data.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "clash-of-clans",
+    "coc",
+    "war",
+    "live-activity",
+    "github-pages",
+    "github-actions"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
