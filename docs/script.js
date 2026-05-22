@@ -231,7 +231,17 @@ function updateActivityFeed(data) {
   container.innerHTML = '';
 
   if (activities.length === 0) {
-    container.innerHTML = '<div class="empty-feed"><p>Waiting for war activity...</p></div>';
+    // Check if clan is in preparation phase
+    const warState = warData?.state;
+    let emptyMessage = 'Waiting for war activity...';
+    
+    if (warState === 'notInWar') {
+      emptyMessage = 'Belum ada aktivitas penyerangan (Masih dalam hari persiapan)';
+    } else if (warState === 'inWar') {
+      emptyMessage = 'Belum ada penyerangan. Anggota clan sedang mencari lawan...';
+    }
+    
+    container.innerHTML = `<div class="empty-feed"><p>${emptyMessage}</p></div>`;
     elements.activityCount.textContent = '0';
     return;
   }
