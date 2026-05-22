@@ -108,7 +108,7 @@ function createPlaceholderWar(clanData) {
     },
     opponent: {
       tag: 'N/A',
-      name: 'Waiting for war...',
+      name: 'Will appear when battle starts',
       level: 0,
       stars: 0,
       destructionPercentage: 0,
@@ -116,7 +116,7 @@ function createPlaceholderWar(clanData) {
     },
     attacks: [],
     isPlaceholder: true,
-    message: 'Clan is not currently in war. Waiting for war to start.'
+    message: 'Clan is in preparation phase. Enemy details will appear when battle day starts.'
   };
 }
 
