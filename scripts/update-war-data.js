@@ -49,11 +49,27 @@ async function getWarData() {
     return response.data;
   } catch (error) {
     if (error.response?.status === 403 || error.response?.status === 404) {
-      console.warn('⚠️  War data not available (clan not in war)');
+      console.warn('⚠️  Current war not available (clan may be in preparation)');
       console.warn('   Status:', error.response?.status);
-      console.warn('   Returning placeholder data...');
+      console.warn('   Trying war league group endpoint...');
       
-      // Try to get clan info instead
+      // Try war league group endpoint for preparation phase
+      try {
+        const leagueResponse = await axios.get(
+          `${API_BASE_URL}/clans/${encodeTag(CLAN_TAG)}/currentwarleaguegroup`,
+          { headers }
+        );
+        
+        if (leagueResponse.data && leagueResponse.data.state) {
+          console.log('✅ War league group data found, state:', leagueResponse.data.state);
+          return leagueResponse.data;
+        }
+      } catch (leagueError) {
+        console.warn('⚠️  War league group also not available');
+      }
+      
+      // Fallback to clan info for preparation phase
+      console.warn('   Returning placeholder with clan data...');
       try {
         const clanResponse = await axios.get(
           `${API_BASE_URL}/clans/${encodeTag(CLAN_TAG)}`,
