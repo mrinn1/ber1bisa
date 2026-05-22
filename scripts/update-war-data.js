@@ -114,7 +114,7 @@ function createPlaceholderWar(clanData) {
   })) : [];
   
   return {
-    state: 'notInWar',
+    state: 'preparation',
     id: 'N/A',
     warId: 'N/A',
     teamSize: members.length,
