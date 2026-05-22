@@ -181,8 +181,9 @@ function updateWarStats(data) {
     }
     
     elements.enemyName.textContent = 'Akan muncul saat perang dimulai';
-    if (elements.enemyTag && elements.enemyTag.parentElement) {
-      elements.enemyTag.parentElement.style.display = 'none';
+    // Hide only the tag element itself, not its parent (clan-info)
+    if (elements.enemyTag) {
+      elements.enemyTag.style.display = 'none';
     }
   } else {
     // War phase: show actual enemy data
@@ -194,8 +195,10 @@ function updateWarStats(data) {
     }
     elements.enemyName.textContent = enemyName;
     elements.enemyTag.textContent = enemyTag;
-    if (elements.enemyTag && elements.enemyTag.parentElement) {
-      elements.enemyTag.parentElement.style.display = 'block';
+    // Show tag element during war phase
+    if (elements.enemyTag) {
+      elements.enemyTag.style.removeProperty('display');
+      elements.enemyTag.style.display = 'block';
     }
   }
   
