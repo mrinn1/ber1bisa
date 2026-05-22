@@ -30,28 +30,8 @@ const elements = {
   clanMembers: document.getElementById('clanMembers'),
   clanProgressBar: document.getElementById('clanProgressBar'),
 
-  // Enemy clan info container and badges - lazy loaded to ensure DOM is ready
-  get enemyClanInfoDiv() {
-    if (!this._enemyClanInfoDiv) {
-      const enemyCard = document.querySelector('.enemy-card');
-      this._enemyClanInfoDiv = enemyCard ? enemyCard.querySelector('.clan-info') : null;
-    }
-    return this._enemyClanInfoDiv;
-  },
-  get clanBadge() {
-    if (!this._clanBadge) {
-      const clanCard = document.querySelector('.clan-card .card-header');
-      this._clanBadge = clanCard ? clanCard.querySelector('.badge') : null;
-    }
-    return this._clanBadge;
-  },
-  get enemyBadge() {
-    if (!this._enemyBadge) {
-      const enemyCard = document.querySelector('.enemy-card .card-header');
-      this._enemyBadge = enemyCard ? enemyCard.querySelector('.badge') : null;
-    }
-    return this._enemyBadge;
-  },
+  // Enemy clan info container and badges
+  // Note: These are NO LONGER cached. We use direct querySelector when needed to ensure DOM is ready
   enemyName: document.getElementById('enemyName'),
   enemyTag: document.getElementById('enemyTag'),
   enemyStars: document.getElementById('enemyStars'),
@@ -180,14 +160,26 @@ function updateWarStats(data) {
   if (data.state === 'notInWar' || enemyTag === 'N/A') {
     // Preparation phase: show message, make clan info visible
     console.log('🔍 Preparation phase - showing message');
+    console.log('War state:', data.state, 'Enemy tag:', enemyTag);
+    
     // Get element directly to ensure we have the latest reference
+    const enemyCard = document.querySelector('.enemy-card');
+    console.log('Enemy card element:', enemyCard);
+    
     const enemyClanInfoDiv = document.querySelector('.enemy-card .clan-info');
+    console.log('Clan info div element:', enemyClanInfoDiv);
+    console.log('Current display style:', enemyClanInfoDiv?.style.display);
+    console.log('Computed display:', window.getComputedStyle(enemyClanInfoDiv).display);
+    
     if (enemyClanInfoDiv) {
+      // Force remove any display: none
+      enemyClanInfoDiv.style.removeProperty('display');
       enemyClanInfoDiv.style.display = 'block';
-      console.log('✅ Enemy clan info made visible');
+      console.log('✅ Enemy clan info made visible - display set to:', enemyClanInfoDiv.style.display);
     } else {
       console.log('⚠️ enemyClanInfoDiv not found!');
     }
+    
     elements.enemyName.textContent = 'Akan muncul saat perang dimulai';
     if (elements.enemyTag && elements.enemyTag.parentElement) {
       elements.enemyTag.parentElement.style.display = 'none';
@@ -197,6 +189,7 @@ function updateWarStats(data) {
     console.log('⚔️ War phase - showing opponent data');
     const enemyClanInfoDiv = document.querySelector('.enemy-card .clan-info');
     if (enemyClanInfoDiv) {
+      enemyClanInfoDiv.style.removeProperty('display');
       enemyClanInfoDiv.style.display = 'block';
     }
     elements.enemyName.textContent = enemyName;
