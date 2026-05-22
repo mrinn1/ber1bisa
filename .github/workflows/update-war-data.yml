@@ -1,40 +1,29 @@
-name: Update War Data
+﻿name: Update War Data
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Jalan setiap 5 menit
-  workflow_dispatch:       # Manual trigger
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
-  update-war:
+  update:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '18'
       
-      - name: Install dependencies
-        run: npm install axios
+      - run: npm install
       
-      - name: Update war data
+      - run: node scripts/update-war-data.js
         env:
           COC_KEY: ${{ secrets.COC_KEY }}
-        run: node scripts/update-war-data.js
       
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          
-          if git diff --quiet; then
-            echo "No changes detected"
-          else
-            git add data/
-            git commit -m "🔄 Update war data - $(date '+%Y-%m-%d %H:%M:%S')"
-            git push
-          fi
+      - run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git commit -m "Update war data" || true
+          git push
