@@ -30,6 +30,8 @@ const elements = {
   clanMembers: document.getElementById('clanMembers'),
   clanProgressBar: document.getElementById('clanProgressBar'),
 
+  // Enemy clan info container
+  enemyClanInfo: document.querySelector('.enemy-card .clan-info'),
   enemyName: document.getElementById('enemyName'),
   enemyTag: document.getElementById('enemyTag'),
   enemyStars: document.getElementById('enemyStars'),
@@ -155,9 +157,17 @@ function updateWarStats(data) {
   
   // Update enemy name - use Indonesian for preparation phase
   if (data.state === 'notInWar' || enemyTag === 'N/A') {
+    // Preparation phase: show message, make clan info visible
+    if (elements.enemyClanInfo) {
+      elements.enemyClanInfo.style.display = 'block';
+    }
     elements.enemyName.textContent = 'Akan muncul saat perang dimulai';
     elements.enemyTag.parentElement.style.display = 'none'; // Hide tag for preparation
   } else {
+    // War phase: show actual enemy data
+    if (elements.enemyClanInfo) {
+      elements.enemyClanInfo.style.display = 'block';
+    }
     elements.enemyName.textContent = enemyName;
     elements.enemyTag.textContent = enemyTag;
     elements.enemyTag.parentElement.style.display = 'block'; // Show tag during war
@@ -180,10 +190,19 @@ function updateWarStats(data) {
   const maxAttacks = data.remainingAttacks?.max || (data.teamSize * 2) || 0;
   const percentage = maxAttacks > 0 ? Math.round((totalAttacks / maxAttacks) * 100) : 0;
   
-  elements.totalAttacks.textContent = totalAttacks;
-  elements.attackPercentage.textContent = `${percentage}% Complete`;
-  elements.remainingAttacks.textContent = data.remainingAttacks?.remaining || 0;
-  elements.remainingDesc.textContent = `of ${maxAttacks} attacks left`;
+  // During preparation phase, show 0 remaining attacks and waiting message
+  if (data.state === 'notInWar' || data.state === 'preparation') {
+    elements.totalAttacks.textContent = '0';
+    elements.attackPercentage.textContent = '0% Complete';
+    elements.remainingAttacks.textContent = '0';
+    elements.remainingDesc.textContent = 'Menunggu perang dimulai...';
+  } else {
+    // During active war, show real statistics
+    elements.totalAttacks.textContent = totalAttacks;
+    elements.attackPercentage.textContent = `${percentage}% Complete`;
+    elements.remainingAttacks.textContent = data.remainingAttacks?.remaining || 0;
+    elements.remainingDesc.textContent = `of ${maxAttacks} attacks left`;
+  }
 
   // War Status
   const statusText = data.state === 'inWar' ? 'In Battle' : 
