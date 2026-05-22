@@ -166,7 +166,8 @@ function updateWarStats(data) {
   elements.enemyStars.textContent = data.opponent?.stars || 0;
   elements.enemyDestruction.textContent = `${data.opponent?.destruction || 0}%`;
   elements.enemyLevel.textContent = data.opponent?.level || 0;
-  elements.enemyMembers.textContent = data.teamSize || 0;
+  // Show 0 members during preparation, actual count during war
+  elements.enemyMembers.textContent = data.state === 'notInWar' ? '0' : (data.opponent?.memberCount || 0);
 
   // Progress Bars
   const clanProgress = data.clan?.destruction || 0;
@@ -202,17 +203,13 @@ function updateWarStats(data) {
  * Update members not attacked list
  */
 function updateMembersNotAttacked(data) {
-  // Get members not attacked or all clan members during preparation
+  // Get members not attacked during active war
   let members = data?.membersNotAttacked || [];
   
-  // During preparation phase, show all clan members since no attacks yet
-  if (data?.state === 'notInWar' && members.length === 0 && data?.clan?.members) {
-    members = data.clan.members.map(m => ({
-      name: m.name,
-      tag: m.tag,
-      townHallLevel: m.townHallLevel || m.expLevel || '--',
-      mapPosition: m.mapPosition || '--'
-    })).slice(0, 10); // Show first 10 members
+  // During preparation phase, don't show any members
+  // Only show members during active war
+  if (data?.state === 'notInWar' || data?.state === 'preparation') {
+    members = []; // Empty during preparation
   }
   
   const container = elements.membersGrid;
