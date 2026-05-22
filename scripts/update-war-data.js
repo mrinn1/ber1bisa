@@ -8,8 +8,8 @@ const CLAN_TAG = '#GY09U9V2'; // Ganti dengan clan tag Anda - encode '#' sebagai
 const API_BASE_URL = 'https://api.clashofclans.com/v1';
 
 // Path untuk data files
-const warDataPath = path.join(__dirname, '../data/war-data.json');
-const activityPath = path.join(__dirname, '../data/activity.json');
+const warDataPath = path.join(__dirname, '../docs/data/war-data.json');
+const activityPath = path.join(__dirname, '../docs/data/activity.json');
 
 const headers = {
   'Authorization': `Bearer ${COC_API_KEY}`,

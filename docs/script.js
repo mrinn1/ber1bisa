@@ -3,8 +3,8 @@
 // ===========================
 const CONFIG = {
   REFRESH_INTERVAL: 30000, // 30 seconds
-  DATA_URL_WAR: '../data/war-data.json',
-  DATA_URL_ACTIVITY: '../data/activity.json',
+  DATA_URL_WAR: './data/war-data.json',
+  DATA_URL_ACTIVITY: './data/activity.json',
   TIMEZONE: 'en-US',
   TIME_FORMAT: { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }
 };

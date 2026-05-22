@@ -1,0 +1,43 @@
+{
+  "warId": "1234567890",
+  "state": "inWar",
+  "startTime": "20240101T120000.000Z",
+  "endTime": "20240101T180000.000Z",
+  "teamSize": 50,
+  "clan": {
+    "tag": "#2PQ2QQUL2",
+    "name": "Example Clan",
+    "level": 10,
+    "stars": 245,
+    "destruction": 89.5,
+    "memberCount": 50,
+    "attacks": 47
+  },
+  "opponent": {
+    "tag": "#2PQ2QQUL3",
+    "name": "Enemy Clan",
+    "level": 9,
+    "stars": 198,
+    "destruction": 78.3
+  },
+  "totalAttacks": 94,
+  "maxAttacks": 100,
+  "remainingAttacks": {
+    "used": 94,
+    "max": 100,
+    "remaining": 6,
+    "percentage": 94
+  },
+  "membersNotAttacked": [
+    {
+      "tag": "#234567890",
+      "name": "Player Name",
+      "townHallLevel": 13,
+      "mapPosition": 45
+    }
+  ],
+  "updates": {
+    "lastFetch": "2024-01-01T18:30:00.000Z",
+    "changeDetected": false
+  }
+}
