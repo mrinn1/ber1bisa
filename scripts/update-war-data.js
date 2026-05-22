@@ -48,9 +48,55 @@ async function getWarData() {
     );
     return response.data;
   } catch (error) {
+    if (error.response?.status === 403 || error.response?.status === 404) {
+      console.warn('⚠️  War data not available (clan not in war)');
+      console.warn('   Status:', error.response?.status);
+      console.warn('   Returning placeholder data...');
+      
+      // Try to get clan info instead
+      try {
+        const clanResponse = await axios.get(
+          `${API_BASE_URL}/clans/${encodeTag(CLAN_TAG)}`,
+          { headers }
+        );
+        return createPlaceholderWar(clanResponse.data);
+      } catch (clanError) {
+        console.error('Error fetching clan data:', clanError.message);
+        return null;
+      }
+    }
     console.error('Error fetching war data:', error.message);
     return null;
   }
+}
+
+function createPlaceholderWar(clanData) {
+  return {
+    state: 'notInWar',
+    warId: 'N/A',
+    teamSize: 0,
+    startTime: null,
+    endTime: null,
+    clan: {
+      tag: clanData.tag,
+      name: clanData.name,
+      level: clanData.clanLevel,
+      stars: 0,
+      destructionPercentage: 0,
+      members: clanData.members || [],
+      attacks: 0
+    },
+    opponent: {
+      tag: 'N/A',
+      name: 'Waiting for war...',
+      level: 0,
+      stars: 0,
+      destructionPercentage: 0
+    },
+    attacks: [],
+    isPlaceholder: true,
+    message: 'Clan is not currently in war. Waiting for war to start.'
+  };
 }
 
 async function detectAttackChanges(oldWar, newWar) {
@@ -193,22 +239,41 @@ async function main() {
   const newWar = await getWarData();
 
   if (!newWar) {
-    console.error('❌ Failed to fetch war data from API');
+    console.error('❌ Failed to fetch war data or clan data from API');
+    console.log('💾 Keeping previous data if available');
+    
+    if (oldWar) {
+      console.log('✅ Using cached war data');
+      oldActivities.lastUpdated = getCurrentTimestamp();
+      saveJson(activityPath, oldActivities);
+      console.log(`✅ Update completed at ${getCurrentTimestamp()}`);
+      process.exit(0);
+    }
+    
     process.exit(1);
   }
 
-  console.log('✅ War data fetched successfully');
+  console.log('✅ Data fetched successfully');
   console.log('War State:', newWar.state);
-
-  // Detect changes
-  const newActivities = await detectAttackChanges(oldWar, newWar);
   
-  if (newActivities.length > 0) {
-    console.log(`🎯 Detected ${newActivities.length} new/updated activities`);
+  if (newWar.isPlaceholder) {
+    console.log('📋 Message:', newWar.message);
+  }
+
+  // Detect changes (skip if not in war)
+  let newActivities = [];
+  if (newWar.state === 'inWar' && oldWar && oldWar.state === 'inWar') {
+    newActivities = await detectAttackChanges(oldWar, newWar);
     
-    // Merge with existing activities (keep last 100)
-    const allActivities = [...newActivities, ...(oldActivities.activities || [])];
-    oldActivities.activities = allActivities.slice(0, 100);
+    if (newActivities.length > 0) {
+      console.log(`🎯 Detected ${newActivities.length} new/updated activities`);
+      
+      // Merge with existing activities (keep last 100)
+      const allActivities = [...newActivities, ...(oldActivities.activities || [])];
+      oldActivities.activities = allActivities.slice(0, 100);
+    }
+  } else if (newWar.state !== 'inWar') {
+    console.log('⏳ Clan not in war - activity detection skipped');
   }
 
   // Update timestamp
@@ -225,7 +290,8 @@ async function main() {
     membersNotAttacked,
     updates: {
       lastFetch: getCurrentTimestamp(),
-      changeDetected: newActivities.length > 0
+      changeDetected: newActivities.length > 0,
+      isPlaceholder: newWar.isPlaceholder || false
     }
   };
 
