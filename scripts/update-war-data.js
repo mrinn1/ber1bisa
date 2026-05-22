@@ -75,7 +75,25 @@ async function getWarData() {
           `${API_BASE_URL}/clans/${encodeTag(CLAN_TAG)}`,
           { headers }
         );
-        return createPlaceholderWar(clanResponse.data);
+        const clanData = clanResponse.data;
+        console.log(`📋 Clan: ${clanData.name}, Members: ${clanData.members}`);
+        
+        // Fetch members list separately
+        try {
+          const membersResponse = await axios.get(
+            `${API_BASE_URL}/clans/${encodeTag(CLAN_TAG)}/members`,
+            { headers }
+          );
+          if (membersResponse.data && membersResponse.data.items) {
+            clanData.members = membersResponse.data.items;
+            console.log(`✅ Fetched ${membersResponse.data.items.length} members`);
+          }
+        } catch (membersError) {
+          console.warn('⚠️  Could not fetch members list');
+          clanData.members = []; // Fallback to empty
+        }
+        
+        return createPlaceholderWar(clanData);
       } catch (clanError) {
         console.error('Error fetching clan data:', clanError.message);
         return null;
@@ -88,7 +106,12 @@ async function getWarData() {
 
 function createPlaceholderWar(clanData) {
   // Convert members to expected format
-  const members = Array.isArray(clanData.members) ? clanData.members : [];
+  const members = Array.isArray(clanData.members) ? clanData.members.map(m => ({
+    name: m.name,
+    tag: m.tag,
+    townHallLevel: m.townHallLevel || m.expLevel || 1,
+    mapPosition: m.mapPosition || '--'
+  })) : [];
   
   return {
     state: 'notInWar',
@@ -103,6 +126,7 @@ function createPlaceholderWar(clanData) {
       level: clanData.clanLevel,
       stars: 0,
       destructionPercentage: 0,
+      memberCount: members.length,
       members: members,
       attacks: []
     },
@@ -115,6 +139,15 @@ function createPlaceholderWar(clanData) {
       members: []
     },
     attacks: [],
+    totalAttacks: 0,
+    maxAttacks: members.length * 2,
+    remainingAttacks: {
+      used: 0,
+      max: members.length * 2,
+      remaining: members.length * 2,
+      percentage: 0
+    },
+    membersNotAttacked: [],
     isPlaceholder: true,
     message: 'Clan is in preparation phase. Enemy details will appear when battle day starts.'
   };
@@ -186,7 +219,7 @@ function getWarStats(war) {
   const enemies = war.opponent || {};
 
   return {
-    warId: war.id,
+    warId: war.id || war.warId,
     state: war.state,
     startTime: war.startTime,
     endTime: war.endTime,
@@ -197,7 +230,8 @@ function getWarStats(war) {
       level: allies.level,
       stars: allies.stars,
       destruction: allies.destructionPercentage,
-      memberCount: allies.members ? allies.members.length : 0,
+      memberCount: allies.members ? allies.members.length : (allies.memberCount || 0),
+      members: allies.members || [], // Include members list from API
       attacks: war.attacks ? war.attacks.filter(a => a.attacker.tag.startsWith(allies.tag.substring(0, 4))).length : 0
     },
     opponent: {
@@ -208,6 +242,7 @@ function getWarStats(war) {
       destruction: enemies.destructionPercentage
     },
     totalAttacks: (war.attacks || []).length,
+    maxAttacks: war.maxAttacks || (war.teamSize * 2) || 0,
     maxAttacks: war.teamSize * 2
   };
 }

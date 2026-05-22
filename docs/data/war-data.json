@@ -3,14 +3,304 @@
   "state": "notInWar",
   "startTime": null,
   "endTime": null,
-  "teamSize": 0,
+  "teamSize": 48,
   "clan": {
     "tag": "#GY09U9V2",
     "name": "Ber.1.Bisa(B1B)",
     "level": 20,
     "stars": 0,
     "destruction": 0,
-    "memberCount": 0,
+    "memberCount": 48,
+    "members": [
+      {
+        "name": "DI HAPUS",
+        "tag": "#9GC9GGJ0G",
+        "townHallLevel": 18,
+        "mapPosition": "--"
+      },
+      {
+        "name": "reyvan",
+        "tag": "#8RQR9RVGU",
+        "townHallLevel": 18,
+        "mapPosition": "--"
+      },
+      {
+        "name": "spider",
+        "tag": "#8RCCU2JYP",
+        "townHallLevel": 18,
+        "mapPosition": "--"
+      },
+      {
+        "name": "aldo",
+        "tag": "#8L2JUVGV",
+        "townHallLevel": 18,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Putra bayu",
+        "tag": "#99CVCPY8V",
+        "townHallLevel": 16,
+        "mapPosition": "--"
+      },
+      {
+        "name": "BmX`Baka~",
+        "tag": "#98CQGG8U9",
+        "townHallLevel": 15,
+        "mapPosition": "--"
+      },
+      {
+        "name": "\"YaS\"",
+        "tag": "#LV2R2Q0YC",
+        "townHallLevel": 16,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Antut",
+        "tag": "#GQULQPYG8",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Sinta",
+        "tag": "#LY9CVLP2G",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "fazriel ganteng",
+        "tag": "#G0RU9LYY2",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "PopYze",
+        "tag": "#GVRGRLVUC",
+        "townHallLevel": 15,
+        "mapPosition": "--"
+      },
+      {
+        "name": "MomoiShan_Dfnsl",
+        "tag": "#GG8U2JLGJ",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "NightStalkeR",
+        "tag": "#LQGU0YVCC",
+        "townHallLevel": 15,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Issei",
+        "tag": "#L09V9RVJQ",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Arsalvin",
+        "tag": "#QVYCQ9U8P",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "sanz!!",
+        "tag": "#Q9UU8PRYG",
+        "townHallLevel": 15,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Risky Panggih S",
+        "tag": "#2QQYVLPL2",
+        "townHallLevel": 15,
+        "mapPosition": "--"
+      },
+      {
+        "name": "arnol",
+        "tag": "#2VQY9PQ2Q",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Wakum",
+        "tag": "#GCQ8YQ29U",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "endry kaguya",
+        "tag": "#8LPPL02U2",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Nayla",
+        "tag": "#QRU2YVLCR",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Aryaa.",
+        "tag": "#PQ989VRCC",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "hans",
+        "tag": "#9GRPG022U",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "¥Papa√Racing¥",
+        "tag": "#GJGGJYRPQ",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "HenryWinardi",
+        "tag": "#9PP0CCUGY",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Harakirii",
+        "tag": "#L82Y0P9JP",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Pemain Clash",
+        "tag": "#GR2PUGLVY",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Marpolloz",
+        "tag": "#208YYG0LR",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "\"GiGiH\"",
+        "tag": "#GV82U9RG0",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Toyyyy",
+        "tag": "#R2V2YGG0",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "XIAO YAN",
+        "tag": "#GVVVPRGYJ",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "@tirta_02",
+        "tag": "#9G20C298U",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Anbu_C2",
+        "tag": "#P292VGVQY",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Mr.RIN",
+        "tag": "#99Q28YJ2",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "JULI AKATSUKI",
+        "tag": "#2V0CVPJUP",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "⭕⭕AYAME⭕⭕",
+        "tag": "#G29R00JG2",
+        "townHallLevel": 12,
+        "mapPosition": "--"
+      },
+      {
+        "name": "\"3r0s3\"",
+        "tag": "#GUUQRP2VU",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "firiA™",
+        "tag": "#GVPJGGUR9",
+        "townHallLevel": 12,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Dmune_X",
+        "tag": "#2JRR98RGC",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "BapakUCOK",
+        "tag": "#QU28Q28Q2",
+        "townHallLevel": 12,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Victoria",
+        "tag": "#YUCLLVQ28",
+        "townHallLevel": 12,
+        "mapPosition": "--"
+      },
+      {
+        "name": "SAYTOD",
+        "tag": "#GRG22J2UV",
+        "townHallLevel": 11,
+        "mapPosition": "--"
+      },
+      {
+        "name": "ipon",
+        "tag": "#GR8P89LVP",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Rufus",
+        "tag": "#YYVLU20UY",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "▃ ▄ ▅ ▆ 5G",
+        "tag": "#R0JG88P20",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Sacocas",
+        "tag": "#G22JRV9R2",
+        "townHallLevel": 14,
+        "mapPosition": "--"
+      },
+      {
+        "name": "X-Vans",
+        "tag": "#GPVQ2R0YU",
+        "townHallLevel": 13,
+        "mapPosition": "--"
+      },
+      {
+        "name": "Mamat_1987",
+        "tag": "#P00R8QYQV",
+        "townHallLevel": 12,
+        "mapPosition": "--"
+      }
+    ],
     "attacks": 0
   },
   "opponent": {
@@ -21,16 +311,305 @@
     "destruction": 0
   },
   "totalAttacks": 0,
-  "maxAttacks": 0,
+  "maxAttacks": 96,
   "remainingAttacks": {
     "used": 0,
-    "max": 0,
-    "remaining": 0,
-    "percentage": null
+    "max": 96,
+    "remaining": 96,
+    "percentage": 0
   },
-  "membersNotAttacked": [],
+  "membersNotAttacked": [
+    {
+      "tag": "#9GC9GGJ0G",
+      "name": "DI HAPUS",
+      "townHallLevel": 18,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#8RQR9RVGU",
+      "name": "reyvan",
+      "townHallLevel": 18,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#8RCCU2JYP",
+      "name": "spider",
+      "townHallLevel": 18,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#8L2JUVGV",
+      "name": "aldo",
+      "townHallLevel": 18,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#99CVCPY8V",
+      "name": "Putra bayu",
+      "townHallLevel": 16,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#98CQGG8U9",
+      "name": "BmX`Baka~",
+      "townHallLevel": 15,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#LV2R2Q0YC",
+      "name": "\"YaS\"",
+      "townHallLevel": 16,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GQULQPYG8",
+      "name": "Antut",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#LY9CVLP2G",
+      "name": "Sinta",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#G0RU9LYY2",
+      "name": "fazriel ganteng",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GVRGRLVUC",
+      "name": "PopYze",
+      "townHallLevel": 15,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GG8U2JLGJ",
+      "name": "MomoiShan_Dfnsl",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#LQGU0YVCC",
+      "name": "NightStalkeR",
+      "townHallLevel": 15,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#L09V9RVJQ",
+      "name": "Issei",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#QVYCQ9U8P",
+      "name": "Arsalvin",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#Q9UU8PRYG",
+      "name": "sanz!!",
+      "townHallLevel": 15,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#2QQYVLPL2",
+      "name": "Risky Panggih S",
+      "townHallLevel": 15,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#2VQY9PQ2Q",
+      "name": "arnol",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GCQ8YQ29U",
+      "name": "Wakum",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#8LPPL02U2",
+      "name": "endry kaguya",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#QRU2YVLCR",
+      "name": "Nayla",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#PQ989VRCC",
+      "name": "Aryaa.",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#9GRPG022U",
+      "name": "hans",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GJGGJYRPQ",
+      "name": "¥Papa√Racing¥",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#9PP0CCUGY",
+      "name": "HenryWinardi",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#L82Y0P9JP",
+      "name": "Harakirii",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GR2PUGLVY",
+      "name": "Pemain Clash",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#208YYG0LR",
+      "name": "Marpolloz",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GV82U9RG0",
+      "name": "\"GiGiH\"",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#R2V2YGG0",
+      "name": "Toyyyy",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GVVVPRGYJ",
+      "name": "XIAO YAN",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#9G20C298U",
+      "name": "@tirta_02",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#P292VGVQY",
+      "name": "Anbu_C2",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#99Q28YJ2",
+      "name": "Mr.RIN",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#2V0CVPJUP",
+      "name": "JULI AKATSUKI",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#G29R00JG2",
+      "name": "⭕⭕AYAME⭕⭕",
+      "townHallLevel": 12,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GUUQRP2VU",
+      "name": "\"3r0s3\"",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GVPJGGUR9",
+      "name": "firiA™",
+      "townHallLevel": 12,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#2JRR98RGC",
+      "name": "Dmune_X",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#QU28Q28Q2",
+      "name": "BapakUCOK",
+      "townHallLevel": 12,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#YUCLLVQ28",
+      "name": "Victoria",
+      "townHallLevel": 12,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GRG22J2UV",
+      "name": "SAYTOD",
+      "townHallLevel": 11,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GR8P89LVP",
+      "name": "ipon",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#YYVLU20UY",
+      "name": "Rufus",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#R0JG88P20",
+      "name": "▃ ▄ ▅ ▆ 5G",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#G22JRV9R2",
+      "name": "Sacocas",
+      "townHallLevel": 14,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#GPVQ2R0YU",
+      "name": "X-Vans",
+      "townHallLevel": 13,
+      "mapPosition": "--"
+    },
+    {
+      "tag": "#P00R8QYQV",
+      "name": "Mamat_1987",
+      "townHallLevel": 12,
+      "mapPosition": "--"
+    }
+  ],
   "updates": {
-    "lastFetch": "2026-05-22T05:06:02.544Z",
+    "lastFetch": "2026-05-22T05:19:09.763Z",
     "changeDetected": false,
     "isPlaceholder": true
   }

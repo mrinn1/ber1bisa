@@ -150,8 +150,19 @@ function updateWarStats(data) {
   elements.clanMembers.textContent = data.clan?.memberCount || 0;
 
   // Enemy Stats
-  elements.enemyName.textContent = data.opponent?.name || 'Unknown';
-  elements.enemyTag.textContent = data.opponent?.tag || '--';
+  const enemyName = data.opponent?.name || 'Unknown';
+  const enemyTag = data.opponent?.tag || 'N/A';
+  
+  // Update enemy name - use Indonesian for preparation phase
+  if (data.state === 'notInWar' || enemyTag === 'N/A') {
+    elements.enemyName.textContent = 'Akan muncul saat perang dimulai';
+    elements.enemyTag.parentElement.style.display = 'none'; // Hide tag for preparation
+  } else {
+    elements.enemyName.textContent = enemyName;
+    elements.enemyTag.textContent = enemyTag;
+    elements.enemyTag.parentElement.style.display = 'block'; // Show tag during war
+  }
+  
   elements.enemyStars.textContent = data.opponent?.stars || 0;
   elements.enemyDestruction.textContent = `${data.opponent?.destruction || 0}%`;
   elements.enemyLevel.textContent = data.opponent?.level || 0;
@@ -163,18 +174,23 @@ function updateWarStats(data) {
   elements.clanProgressBar.style.width = `${clanProgress}%`;
   elements.enemyProgressBar.style.width = `${enemyProgress}%`;
 
-  // Attack Stats
-  elements.totalAttacks.textContent = data.totalAttacks || 0;
-  elements.attackPercentage.textContent = `${data.remainingAttacks?.percentage || 0}% Complete`;
+  // Attack Stats - Real data from API
+  const totalAttacks = data.totalAttacks || 0;
+  const maxAttacks = data.remainingAttacks?.max || (data.teamSize * 2) || 0;
+  const percentage = maxAttacks > 0 ? Math.round((totalAttacks / maxAttacks) * 100) : 0;
+  
+  elements.totalAttacks.textContent = totalAttacks;
+  elements.attackPercentage.textContent = `${percentage}% Complete`;
   elements.remainingAttacks.textContent = data.remainingAttacks?.remaining || 0;
-  elements.remainingDesc.textContent = `of ${data.remainingAttacks?.max || 0} attacks left`;
+  elements.remainingDesc.textContent = `of ${maxAttacks} attacks left`;
 
   // War Status
   const statusText = data.state === 'inWar' ? 'In Battle' : 
                      data.state === 'preparation' ? 'Preparation' :
+                     data.state === 'notInWar' ? 'Preparation' :
                      data.state === 'warEnded' ? 'Ended' : 'Unknown';
   elements.warStatus.textContent = statusText;
-  elements.warTime.textContent = formatTime(data.startTime);
+  elements.warTime.textContent = data.state === 'inWar' ? formatTime(data.startTime) : 'Pending';
 
   // Update timestamp
   const now = new Date().toLocaleTimeString(CONFIG.TIMEZONE, CONFIG.TIME_FORMAT);
@@ -186,7 +202,19 @@ function updateWarStats(data) {
  * Update members not attacked list
  */
 function updateMembersNotAttacked(data) {
-  const members = data?.membersNotAttacked || [];
+  // Get members not attacked or all clan members during preparation
+  let members = data?.membersNotAttacked || [];
+  
+  // During preparation phase, show all clan members since no attacks yet
+  if (data?.state === 'notInWar' && members.length === 0 && data?.clan?.members) {
+    members = data.clan.members.map(m => ({
+      name: m.name,
+      tag: m.tag,
+      townHallLevel: m.townHallLevel || m.expLevel || '--',
+      mapPosition: m.mapPosition || '--'
+    })).slice(0, 10); // Show first 10 members
+  }
+  
   const container = elements.membersGrid;
   const emptyState = elements.emptyMembers;
 
@@ -208,11 +236,11 @@ function updateMembersNotAttacked(data) {
     card.className = 'member-card';
     card.innerHTML = `
       <div class="member-name">
-        <span>${member.name}</span>
-        <span class="member-level">TH${member.townHallLevel}</span>
+        <span>${member.name || 'Unknown'}</span>
+        <span class="member-level">TH${member.townHallLevel || '--'}</span>
       </div>
       <div class="member-details">
-        <p><strong>Tag:</strong> ${member.tag}</p>
+        <p><strong>Tag:</strong> ${member.tag || '--'}</p>
         <p><strong>Position:</strong> ${member.mapPosition || '--'}</p>
       </div>
     `;
