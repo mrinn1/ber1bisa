@@ -30,8 +30,11 @@ const elements = {
   clanMembers: document.getElementById('clanMembers'),
   clanProgressBar: document.getElementById('clanProgressBar'),
 
-  // Enemy clan info container
-  enemyClanInfo: document.querySelector('.enemy-card .clan-info'),
+  // Enemy clan info container - get it by finding enemy card then clan-info inside
+  enemyClanInfo: (() => {
+    const enemyCard = document.querySelector('.enemy-card');
+    return enemyCard ? enemyCard.querySelector('.clan-info') : null;
+  })(),
   enemyName: document.getElementById('enemyName'),
   enemyTag: document.getElementById('enemyTag'),
   enemyStars: document.getElementById('enemyStars'),
@@ -238,7 +241,12 @@ function updateMembersNotAttacked(data) {
   container.innerHTML = '';
 
   if (members.length === 0) {
-    emptyState.style.display = 'block';
+    // Only show "All members attacked" message during active war, not preparation
+    if (data?.state === 'inWar') {
+      emptyState.style.display = 'block';
+    } else {
+      emptyState.style.display = 'none';
+    }
     elements.memberCount.textContent = '0';
     return;
   }
