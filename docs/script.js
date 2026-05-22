@@ -30,10 +30,18 @@ const elements = {
   clanMembers: document.getElementById('clanMembers'),
   clanProgressBar: document.getElementById('clanProgressBar'),
 
-  // Enemy clan info container - get it by finding enemy card then clan-info inside
-  enemyClanInfo: (() => {
+  // Enemy clan info container and badges
+  enemyClanInfoDiv: (() => {
     const enemyCard = document.querySelector('.enemy-card');
     return enemyCard ? enemyCard.querySelector('.clan-info') : null;
+  })(),
+  clanBadge: (() => {
+    const clanCard = document.querySelector('.clan-card .card-header');
+    return clanCard ? clanCard.querySelector('.badge') : null;
+  })(),
+  enemyBadge: (() => {
+    const enemyCard = document.querySelector('.enemy-card .card-header');
+    return enemyCard ? enemyCard.querySelector('.badge') : null;
   })(),
   enemyName: document.getElementById('enemyName'),
   enemyTag: document.getElementById('enemyTag'),
@@ -152,7 +160,8 @@ function updateWarStats(data) {
   elements.clanStars.textContent = data.clan?.stars || 0;
   elements.clanDestruction.textContent = `${data.clan?.destruction || 0}%`;
   elements.clanLevel.textContent = data.clan?.level || 0;
-  elements.clanMembers.textContent = data.clan?.memberCount || 0;
+  // Show only members participating in war (teamSize), not total clan members
+  elements.clanMembers.textContent = data.teamSize || 0;
 
   // Enemy Stats
   const enemyName = data.opponent?.name || 'Unknown';
@@ -161,19 +170,32 @@ function updateWarStats(data) {
   // Update enemy name - use Indonesian for preparation phase
   if (data.state === 'notInWar' || enemyTag === 'N/A') {
     // Preparation phase: show message, make clan info visible
-    if (elements.enemyClanInfo) {
-      elements.enemyClanInfo.style.display = 'block';
+    console.log('🔍 Preparation phase - showing message');
+    if (elements.enemyClanInfoDiv) {
+      elements.enemyClanInfoDiv.style.removeProperty('display');
+      elements.enemyClanInfoDiv.style.visibility = 'visible';
+      elements.enemyClanInfoDiv.style.opacity = '1';
+      console.log('✅ Enemy clan info made visible');
+    } else {
+      console.log('⚠️ enemyClanInfoDiv not found!');
     }
     elements.enemyName.textContent = 'Akan muncul saat perang dimulai';
-    elements.enemyTag.parentElement.style.display = 'none'; // Hide tag for preparation
+    if (elements.enemyTag && elements.enemyTag.parentElement) {
+      elements.enemyTag.parentElement.style.display = 'none';
+    }
   } else {
     // War phase: show actual enemy data
-    if (elements.enemyClanInfo) {
-      elements.enemyClanInfo.style.display = 'block';
+    console.log('⚔️ War phase - showing opponent data');
+    if (elements.enemyClanInfoDiv) {
+      elements.enemyClanInfoDiv.style.removeProperty('display');
+      elements.enemyClanInfoDiv.style.visibility = 'visible';
+      elements.enemyClanInfoDiv.style.opacity = '1';
     }
     elements.enemyName.textContent = enemyName;
     elements.enemyTag.textContent = enemyTag;
-    elements.enemyTag.parentElement.style.display = 'block'; // Show tag during war
+    if (elements.enemyTag && elements.enemyTag.parentElement) {
+      elements.enemyTag.parentElement.style.display = 'block';
+    }
   }
   
   elements.enemyStars.textContent = data.opponent?.stars || 0;
@@ -214,6 +236,23 @@ function updateWarStats(data) {
                      data.state === 'warEnded' ? 'Ended' : 'Unknown';
   elements.warStatus.textContent = statusText;
   elements.warTime.textContent = data.state === 'inWar' ? formatTime(data.startTime) : 'Pending';
+  
+  // Update badges based on war state
+  if (elements.clanBadge) {
+    if (data.state === 'notInWar') {
+      elements.clanBadge.textContent = 'Pencarian Lawan';
+      elements.clanBadge.className = 'badge badge-warning';
+    } else if (data.state === 'inWar') {
+      elements.clanBadge.textContent = 'In War';
+      elements.clanBadge.className = 'badge badge-success';
+    } else if (data.state === 'warEnded') {
+      elements.clanBadge.textContent = 'War Ended';
+      elements.clanBadge.className = 'badge badge-info';
+    } else {
+      elements.clanBadge.textContent = 'Preparing';
+      elements.clanBadge.className = 'badge badge-warning';
+    }
+  }
 
   // Update timestamp
   const now = new Date().toLocaleTimeString(CONFIG.TIMEZONE, CONFIG.TIME_FORMAT);
