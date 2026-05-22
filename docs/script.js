@@ -172,9 +172,7 @@ function updateWarStats(data) {
     // Preparation phase: show message, make clan info visible
     console.log('🔍 Preparation phase - showing message');
     if (elements.enemyClanInfoDiv) {
-      elements.enemyClanInfoDiv.style.removeProperty('display');
-      elements.enemyClanInfoDiv.style.visibility = 'visible';
-      elements.enemyClanInfoDiv.style.opacity = '1';
+      elements.enemyClanInfoDiv.style.display = 'block';  // Explicitly set to block
       console.log('✅ Enemy clan info made visible');
     } else {
       console.log('⚠️ enemyClanInfoDiv not found!');
@@ -187,9 +185,7 @@ function updateWarStats(data) {
     // War phase: show actual enemy data
     console.log('⚔️ War phase - showing opponent data');
     if (elements.enemyClanInfoDiv) {
-      elements.enemyClanInfoDiv.style.removeProperty('display');
-      elements.enemyClanInfoDiv.style.visibility = 'visible';
-      elements.enemyClanInfoDiv.style.opacity = '1';
+      elements.enemyClanInfoDiv.style.display = 'block';  // Explicitly set to block
     }
     elements.enemyName.textContent = enemyName;
     elements.enemyTag.textContent = enemyTag;
