@@ -181,9 +181,11 @@ function updateWarStats(data) {
     }
     
     elements.enemyName.textContent = 'Akan muncul saat perang dimulai';
-    // Hide only the tag element itself, not its parent (clan-info)
+    // Show tag with same message during preparation
     if (elements.enemyTag) {
-      elements.enemyTag.style.display = 'none';
+      elements.enemyTag.textContent = 'Akan muncul saat perang dimulai';
+      elements.enemyTag.style.removeProperty('display');
+      elements.enemyTag.style.display = 'block';
     }
   } else {
     // War phase: show actual enemy data
@@ -244,25 +246,15 @@ function updateWarStats(data) {
   // Update badges based on war state
   const clanBadge = document.querySelector('.clan-card .card-header .badge');
   if (clanBadge) {
-    if (data.state === 'inWar') {
+    if (data.state === 'notInWar') {
+      clanBadge.textContent = 'Pencarian Lawan';
+      clanBadge.className = 'badge badge-warning';
+    } else if (data.state === 'inWar') {
       clanBadge.textContent = 'In War';
       clanBadge.className = 'badge badge-success';
     } else if (data.state === 'warEnded') {
       clanBadge.textContent = 'War Ended';
       clanBadge.className = 'badge badge-info';
-    } else if (data.state === 'notInWar' || data.state === 'preparation') {
-      // Distinguish between preparation phase (in war, pre-battle) and truly searching
-      const opponentTag = data.opponent?.tag || 'N/A';
-      
-      if (opponentTag === 'N/A' || opponentTag === '--') {
-        // Preparation phase - in war but opponent not yet shown
-        clanBadge.textContent = 'Hari Persiapan';
-        clanBadge.className = 'badge badge-warning';
-      } else {
-        // Truly searching for opponent between wars
-        clanBadge.textContent = 'Pencarian Lawan';
-        clanBadge.className = 'badge badge-warning';
-      }
     } else {
       clanBadge.textContent = 'Preparing';
       clanBadge.className = 'badge badge-warning';
