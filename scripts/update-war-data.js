@@ -71,10 +71,14 @@ async function getWarData() {
 }
 
 function createPlaceholderWar(clanData) {
+  // Convert members to expected format
+  const members = Array.isArray(clanData.members) ? clanData.members : [];
+  
   return {
     state: 'notInWar',
+    id: 'N/A',
     warId: 'N/A',
-    teamSize: 0,
+    teamSize: members.length,
     startTime: null,
     endTime: null,
     clan: {
@@ -83,15 +87,16 @@ function createPlaceholderWar(clanData) {
       level: clanData.clanLevel,
       stars: 0,
       destructionPercentage: 0,
-      members: clanData.members || [],
-      attacks: 0
+      members: members,
+      attacks: []
     },
     opponent: {
       tag: 'N/A',
       name: 'Waiting for war...',
       level: 0,
       stars: 0,
-      destructionPercentage: 0
+      destructionPercentage: 0,
+      members: []
     },
     attacks: [],
     isPlaceholder: true,
