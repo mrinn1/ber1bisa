@@ -30,19 +30,28 @@ const elements = {
   clanMembers: document.getElementById('clanMembers'),
   clanProgressBar: document.getElementById('clanProgressBar'),
 
-  // Enemy clan info container and badges
-  enemyClanInfoDiv: (() => {
-    const enemyCard = document.querySelector('.enemy-card');
-    return enemyCard ? enemyCard.querySelector('.clan-info') : null;
-  })(),
-  clanBadge: (() => {
-    const clanCard = document.querySelector('.clan-card .card-header');
-    return clanCard ? clanCard.querySelector('.badge') : null;
-  })(),
-  enemyBadge: (() => {
-    const enemyCard = document.querySelector('.enemy-card .card-header');
-    return enemyCard ? enemyCard.querySelector('.badge') : null;
-  })(),
+  // Enemy clan info container and badges - lazy loaded to ensure DOM is ready
+  get enemyClanInfoDiv() {
+    if (!this._enemyClanInfoDiv) {
+      const enemyCard = document.querySelector('.enemy-card');
+      this._enemyClanInfoDiv = enemyCard ? enemyCard.querySelector('.clan-info') : null;
+    }
+    return this._enemyClanInfoDiv;
+  },
+  get clanBadge() {
+    if (!this._clanBadge) {
+      const clanCard = document.querySelector('.clan-card .card-header');
+      this._clanBadge = clanCard ? clanCard.querySelector('.badge') : null;
+    }
+    return this._clanBadge;
+  },
+  get enemyBadge() {
+    if (!this._enemyBadge) {
+      const enemyCard = document.querySelector('.enemy-card .card-header');
+      this._enemyBadge = enemyCard ? enemyCard.querySelector('.badge') : null;
+    }
+    return this._enemyBadge;
+  },
   enemyName: document.getElementById('enemyName'),
   enemyTag: document.getElementById('enemyTag'),
   enemyStars: document.getElementById('enemyStars'),
@@ -171,8 +180,10 @@ function updateWarStats(data) {
   if (data.state === 'notInWar' || enemyTag === 'N/A') {
     // Preparation phase: show message, make clan info visible
     console.log('🔍 Preparation phase - showing message');
-    if (elements.enemyClanInfoDiv) {
-      elements.enemyClanInfoDiv.style.display = 'block';  // Explicitly set to block
+    // Get element directly to ensure we have the latest reference
+    const enemyClanInfoDiv = document.querySelector('.enemy-card .clan-info');
+    if (enemyClanInfoDiv) {
+      enemyClanInfoDiv.style.display = 'block';
       console.log('✅ Enemy clan info made visible');
     } else {
       console.log('⚠️ enemyClanInfoDiv not found!');
@@ -184,8 +195,9 @@ function updateWarStats(data) {
   } else {
     // War phase: show actual enemy data
     console.log('⚔️ War phase - showing opponent data');
-    if (elements.enemyClanInfoDiv) {
-      elements.enemyClanInfoDiv.style.display = 'block';  // Explicitly set to block
+    const enemyClanInfoDiv = document.querySelector('.enemy-card .clan-info');
+    if (enemyClanInfoDiv) {
+      enemyClanInfoDiv.style.display = 'block';
     }
     elements.enemyName.textContent = enemyName;
     elements.enemyTag.textContent = enemyTag;
@@ -234,19 +246,20 @@ function updateWarStats(data) {
   elements.warTime.textContent = data.state === 'inWar' ? formatTime(data.startTime) : 'Pending';
   
   // Update badges based on war state
-  if (elements.clanBadge) {
+  const clanBadge = document.querySelector('.clan-card .card-header .badge');
+  if (clanBadge) {
     if (data.state === 'notInWar') {
-      elements.clanBadge.textContent = 'Pencarian Lawan';
-      elements.clanBadge.className = 'badge badge-warning';
+      clanBadge.textContent = 'Pencarian Lawan';
+      clanBadge.className = 'badge badge-warning';
     } else if (data.state === 'inWar') {
-      elements.clanBadge.textContent = 'In War';
-      elements.clanBadge.className = 'badge badge-success';
+      clanBadge.textContent = 'In War';
+      clanBadge.className = 'badge badge-success';
     } else if (data.state === 'warEnded') {
-      elements.clanBadge.textContent = 'War Ended';
-      elements.clanBadge.className = 'badge badge-info';
+      clanBadge.textContent = 'War Ended';
+      clanBadge.className = 'badge badge-info';
     } else {
-      elements.clanBadge.textContent = 'Preparing';
-      elements.clanBadge.className = 'badge badge-warning';
+      clanBadge.textContent = 'Preparing';
+      clanBadge.className = 'badge badge-warning';
     }
   }
 
